@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accdb;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Cloudwork extends Controller
 {
@@ -19,6 +23,18 @@ class Cloudwork extends Controller
     }
 
 
+    public function pro()
+    {
+        if (Auth::check()) {
+
+            return Redirect('/dashboard');
+        }
+
+        return view('login');
+    }
+
+
+
     public function sign()
     {
         if (Auth::check()) {
@@ -30,16 +46,39 @@ class Cloudwork extends Controller
     }
 
 
+    public function pay($id)
+    {
+        if (Auth::check()) {
+            return Redirect('/dashboard');
+        }
+        return view('pay');
+    }
+
+
+    public function patrain($id)
+    {
+
+        return view('pay2');
+    }
+
+    public function checkUserData(Request $request)
+    {
+        $exists = [
+            'username' => \App\Models\User::where('username', $request->username)->exists(),
+            'email'    => \App\Models\User::where('email', $request->email)->exists(),
+            'phone'    => \App\Models\User::where('phone', $request->phone)->exists(),
+        ];
+
+        return response()->json($exists);
+    }
+
+
     public function reg(Request $request)
     {
 
-        $request->validate([
-            'username'   => 'required|string|max:255|unique:users',
-            'email'      => 'required|email|unique:users',
-            'phone'      => 'required|string|max:20|unique:users',
-        ]);
 
-        $user = User::create([
+
+        User::create([
             'fname' => $request->fname,
             'lname'  => $request->lname,
             'username'   => $request->username,
@@ -53,7 +92,26 @@ class Cloudwork extends Controller
             'password'   => bcrypt($request->password),
         ]);
 
-        return response()->json(['success' => true, 'user_id' => $user->id]);
+
+        Accdb::create([
+            'uid' => User::where('email', $request->email)->latest()->first()->id,
+            'user'  => $request->username,
+            'email'      => $request->email,
+            'phone'      => $request->phone,
+            'country'    => $request->country,
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::User();
+            Session::put('name', $user->name);
+            Session::put('type', $user->type);
+
+
+            Alert::success('Registration Successfully!!!', 'Welcome To CloudWorkly!!!');
+            return redirect('/dashboard')->with('success', 'Login Successful!!');
+        }
     }
 
 

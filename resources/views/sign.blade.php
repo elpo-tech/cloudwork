@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Sign Up | Cloud Workly</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/assets/vendors/feather/feather.css">
@@ -36,46 +37,37 @@
                             </div>
                             <h4>Fill The Form To Get Started</h4>
 
-                            <form id="registerForm" class="pt-3">
+                            <form id="registerForm" action="{{ route('register.store') }}" method="POST" class="pt-3">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">First Name</label>
                                     <input type="text" class="form-control" name="fname" placeholder="Enter First Name" required>
-                                    <small class="error" data-error-for="fname" style="color:red"></small>
+                                    <div class="error fname-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Last Name</label>
                                     <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" required>
-                                    <small class="error" data-error-for="lname" style="color:red"></small>
+                                    <div class="error lname-error text-danger"></div>
                                 </div>
 
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Username</label>
                                     <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
-                                    <small class="error" data-error-for="username" style="color:red"></small>
-                                    @if($errors->has('username'))
-                                    <span class="text-danger">{{$errors->first('username')}}</span>
-                                    @endif
+                                    <div class="error username-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Email</label>
                                     <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
-                                    <small class="error" data-error-for="email" style="color:red"></small>
-                                    @if($errors->has('email'))
-                                    <span class="text-danger">{{$errors->first('email')}}</span>
-                                    @endif
+                                    <div class="error email-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Phone Number</label>
                                     <input type="text" class="form-control" name="phone" placeholder="Enter Phone" required>
-                                    <small class="error" data-error-for="phone" style="color:red"></small>
-                                    @if($errors->has('phone'))
-                                    <span class="text-danger">{{$errors->first('phone')}}</span>
-                                    @endif
+                                    <div class="error phone-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
@@ -83,30 +75,30 @@
                                     <select class="form-select" name="country">
                                         @include('cloudwork.parts.country')
                                     </select>
-                                    <small class="error" data-error-for="country" style="color:red"></small>
+                                    <div class="error country-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Password</label>
                                     <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
-                                    <small class="error" data-error-for="password" style="color:red"></small>
+                                    <div class="error password-error text-danger"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Password Confirmation</label>
                                     <input type="password" class="form-control" name="password_confirmation" placeholder="Enter Confirm Password" required>
-                                    <small class="error" data-error-for="password_confirmation" style="color:red"></small>
+                                    <div class="error password_confirmation-error text-danger"></div>
                                 </div>
 
                                 <div class="mb-4">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
                                             <input type="checkbox" name="terms" class="form-check-input"> I agree to all Terms & Conditions</label>
-                                        <small class="error" data-error-for="terms" style="color:red"></small>
+                                        <div class="error terms-error text-danger"></div>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
-                                    <button class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">SIGN UP</button>
+                                    <button type="submit" class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">SIGN UP</button>
                                 </div>
                                 <div class="text-center mt-4 fw-light"> Already have an account? <a href="{{url('/')}}" class="text-primary">Login</a>
                                 </div>
@@ -124,106 +116,75 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(function() {
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop form submit
 
-            function setError(field, message) {
-                $(`[data-error-for="${field}"]`).text(message);
-            }
+            let form = this;
+            let formData = new FormData(form);
 
-            function clearError(field) {
-                $(`[data-error-for="${field}"]`).text("");
-            }
+            // Clear all previous errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
 
-            // Live uniqueness check on blur
-            $("[name='username'], [name='email'], [name='phone']").on("blur", function() {
-                let field = $(this).attr("name");
-                let value = $(this).val().trim();
+            let hasEmpty = false;
 
-                if (value === "") {
-                    setError(field, `${field} is required`);
-                    return;
-                }
-
-                $.get('/check-unique', {
-                    field,
-                    value
-                }, function(res) {
-                    if (!res.unique) {
-                        setError(field, `${field} is already taken`);
-                    } else {
-                        clearError(field);
-                    }
-                });
-            });
-
-            // Password match check on blur
-            $("[name='password'], [name='password_confirmation']").on("blur", function() {
-                let pass = $("[name='password']").val();
-                let passConf = $("[name='password_confirmation']").val();
-
-                if (pass && passConf && pass !== passConf) {
-                    setError('password_confirmation', "Passwords do not match");
-                } else {
-                    clearError('password_confirmation');
+            // 1️⃣ Check empty inputs (text, email, password) and selects
+            form.querySelectorAll('input, select').forEach(input => {
+                if (!input.value.trim()) {
+                    document.querySelector(`.${input.name}-error`).textContent = "This field is required";
+                    hasEmpty = true;
                 }
             });
 
-            // Final submit check
-            $("#registerForm").on("submit", function(e) {
-                e.preventDefault();
-                let form = $(this);
-                let formData = form.serialize();
-                let hasError = false;
+            let checkbox = form.querySelector('input[name="terms"]');
+            if (checkbox && !checkbox.checked) {
+                document.querySelector('.terms-error').textContent = "You must agree to the terms";
+                hasEmpty = true;
+            }
 
-                // Required field check
-                form.find("input[required], select[required]").each(function() {
-                    let field = $(this).attr("name");
-                    if (!$(this).val()) {
-                        setError(field, `${field} is required`);
-                        hasError = true;
-                    } else {
-                        clearError(field);
-                    }
-                });
+            // 2️⃣ Check password match
+            let password = form.querySelector('input[name="password"]').value.trim();
+            let confirmPassword = form.querySelector('input[name="password_confirmation"]').value.trim();
+            if (password && confirmPassword && password !== confirmPassword) {
+                document.querySelector('.password_confirmation-error').textContent = "Passwords do not match";
+                hasEmpty = true;
+            }
 
-                // Password match check
-                let pass = $("[name='password']").val();
-                let passConf = $("[name='password_confirmation']").val();
-                if (pass !== passConf) {
-                    setError('password_confirmation', "Passwords do not match");
-                    hasError = true;
-                }
+            // Stop here if empty fields or mismatched passwords
+            if (hasEmpty) return;
 
-                // Terms check
-                if (!$("[name='terms']").is(":checked")) {
-                    setError('terms', "You must agree to the terms");
-                    hasError = true;
-                } else {
-                    clearError('terms');
-                }
-
-                // Stop if any errors
-                $(".error").each(function() {
-                    if ($(this).text() !== "") hasError = true;
-                });
-                if (hasError) return;
-
-
-                // AJAX submit
-                $.ajax({
-                    url: "{{ route('register.store') }}",
-                    method: "POST",
-                    data: formData,
-                    success: function(response) {
-                        window.location.href = "/mpesa-payment/" + response.user_id;
+            // 3️⃣ Check database for existing username/email/phone
+            fetch('{{ route("users.check") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     },
-                    error: function() {
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    let hasError = false;
 
-                        alert("An error occurred while registering");
+                    if (data.username) {
+                        document.querySelector('.username-error').textContent = "Username already exists";
+                        hasError = true;
                     }
-                });
-            });
+                    if (data.email) {
+                        document.querySelector('.email-error').textContent = "Email already exists";
+                        hasError = true;
+                    }
+                    if (data.phone) {
+                        document.querySelector('.phone-error').textContent = "Phone already exists";
+                        hasError = true;
+                    }
 
+                    // 4️⃣ If no errors → submit form
+                    if (!hasError) {
+                        form.submit();
+                    }
+                })
+                .catch(err => {
+                    console.error('Error checking user data:', err);
+                });
         });
     </script>
 

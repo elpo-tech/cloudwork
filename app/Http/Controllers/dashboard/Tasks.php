@@ -9,28 +9,28 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class Dash extends Controller
+class Tasks extends Controller
 {
-    public function dash()
+    public function task()
     {
 
         if (Auth::check()) {
 
 
-            return view('cloudwork.dashboard');
+            return view('cloudwork.task.task');
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
     }
 
 
-    public function train()
+    public function sub()
     {
 
         if (Auth::check()) {
 
 
-            return view('cloudwork.train');
+            return view('cloudwork.task.sub');
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
@@ -43,63 +43,33 @@ class Dash extends Controller
         if (Auth::check()) {
 
 
-            return view('cloudwork.profile');
+            return view('cloudwork.task.pro');
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
     }
 
-
-    public function not()
+    public function app()
     {
 
         if (Auth::check()) {
 
 
-            return view('cloudwork.notify');
+            return view('cloudwork.task.app');
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
     }
 
-
-    public function prog()
+    public function rej()
     {
 
         if (Auth::check()) {
 
 
-            return view('cloudwork.pro');
+            return view('cloudwork.task.rej');
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
-    }
-
-
-
-    public function tic()
-    {
-
-        if (Auth::check()) {
-
-
-            return view('cloudwork.ticket');
-        }
-
-        return back()->with('error', 'Entry Denied, Log in Again!');
-    }
-
-
-
-    public function logout()
-    {
-        if (Auth::check()) {
-
-            Session::flush();
-
-            Auth::logout();
-
-            return Redirect('/');
-        }
     }
 }

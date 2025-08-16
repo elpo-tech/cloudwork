@@ -27,10 +27,10 @@
              </a>
              <div class="collapse" id="ui-basic">
                  <ul class="nav flex-column sub-menu">
-                     <li class="nav-item"> <a class="nav-link" href="#">In Progress</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Submitted</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Approved</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Rejected</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/progress-task')}}">In Progress</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/submitted-task')}}">Submitted</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/approved-task')}}">Approved</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/rejected-task')}}">Rejected</a></li>
                  </ul>
              </div>
          </li>
@@ -42,27 +42,27 @@
              </a>
              <div class="collapse" id="form-elements">
                  <ul class="nav flex-column sub-menu">
-                     <li class="nav-item"><a class="nav-link" href="#">Task Earnings History</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#">Withdrawal Options</a></li>
+                     <li class="nav-item"><a class="nav-link" href="{{url('/earnings')}}">Earnings</a></li>
+                     <li class="nav-item"><a class="nav-link" href="{{url('/withdraw')}}">Withdraw</a></li>
                  </ul>
              </div>
          </li>
          <li class="nav-item">
-             <a class="nav-link" href="#">
+             <a class="nav-link" href="{{url('/myprogress')}}">
                  <i class="fa fa-sitemap menu-icon"></i>
                  <span class="menu-title">Your Progress</span>
              </a>
          </li>
 
          <li class="nav-item">
-             <a class="nav-link" href="#">
+             <a class="nav-link" href="{{url('/notifications')}}">
                  <i class="fa fa-bell menu-icon"></i>
                  <span class="menu-title">Notifications</span>
              </a>
          </li>
 
          <li class="nav-item">
-             <a class="nav-link" href="#">
+             <a class="nav-link" href="{{url('/profile')}}">
                  <i class="fa fa-cog menu-icon"></i>
                  <span class="menu-title">Account Settings</span>
              </a>
@@ -77,16 +77,41 @@
              <div class="collapse" id="charts">
                  <ul class="nav flex-column sub-menu">
                      <li class="nav-item"> <a class="nav-link" href="#">FAQs</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Submit a Ticket</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/ticket')}}">Submit a Ticket</a></li>
                  </ul>
              </div>
          </li>
 
+         @if(Auth::user()->type == "Admin")
+         <br>
+         <br>
+         <div class="nav-item text-center">Admin Settings</div>
+
+         <li class="nav-item">
+             <a class="nav-link" data-bs-toggle="collapse" href="#contr" aria-expanded="false" aria-controls="contr">
+                 <i class="menu-icon fa fa-cog"></i>
+                 <span class="menu-title">Control Center</span>
+                 <i class="menu-arrow"></i>
+             </a>
+             <div class="collapse" id="contr">
+                 <ul class="nav flex-column sub-menu">
+                     <li class="nav-item"> <a class="nav-link" href="#">All Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="#">Submitted Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="#">Approved Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="#">All Payments</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="#">Withdrawal Requests</a></li>
+                 </ul>
+             </div>
+         </li>
+
+         @endif
          <li class="nav-item">
              <a class="nav-link" href="{{url('/logout')}}">
                  <i class="menu-icon fa fa-sign-out"></i>
                  <span class="menu-title">Sign Out</span>
              </a>
          </li>
+
+
      </ul>
  </nav>

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Notifications | Cloud Workly </title>
+    <title>Progress Status | Cloud Workly </title>
     <!-- plugins:css -->
     @include('cloudwork.parts.head')
     <div class="container-scroller">

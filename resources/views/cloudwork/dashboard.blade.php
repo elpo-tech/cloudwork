@@ -57,18 +57,18 @@
                                                     </div>
                                                     <div>
                                                         <p class="statistics-title">Total Earned</p>
-                                                        <h3 class="rate-percentage">$0.1</h3>
-                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.1</span></p>
+                                                        <h3 class="rate-percentage">$0.00</h3>
+                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Available For Withdrawal</p>
-                                                        <h3 class="rate-percentage">$0.0</h3>
-                                                        <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>$0.0</span></p>
+                                                        <h3 class="rate-percentage">$0.00</h3>
+                                                        <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Total Withdrawn</p>
-                                                        <h3 class="rate-percentage">$0.02</h3>
-                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.02</span></p>
+                                                        <h3 class="rate-percentage">$0.00</h3>
+                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Avg. Time on Site</p>

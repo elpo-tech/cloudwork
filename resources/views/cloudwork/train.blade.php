@@ -25,7 +25,7 @@
                                     <h4 class="card-title">Cloudworkly Training Bootcamp</h4>
 
                                     <p> Increase your task pay with our online bootcamp. Get Matched with trainers who will teach you to do the highest paying tasks</p>
-                                    <button type="button" class="btn btn-primary btn-rounded btn-fw">Pay For Training</button>
+                                    <a href="{{url('/paytrain/2500')}}" class="btn btn-primary btn-rounded btn-fw">Pay For Training</a>
                                 </div>
                             </div>
                         </div>
@@ -53,31 +53,37 @@
                                                 <tr>
                                                     <td>Image & Video Annotation</td>
                                                     <td>53275531</td>
-                                                    <td><a class=" btn badge badge-success" href="#" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Audio Transcription</td>
                                                     <td>53275532</td>
 
-                                                    <td><a class=" btn badge badge-success" href="#" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Data Categorization</td>
                                                     <td>53275533</td>
 
-                                                    <td><a class=" btn badge badge-success" href="#" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>LiDAR Annotation</td>
                                                     <td>53275534</td>
 
-                                                    <td><a class=" btn badge badge-success" href="#" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Content Moderation</td>
                                                     <td>53275535</td>
 
-                                                    <td><a class=" btn badge badge-success" href="#" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Online Writing</td>
+                                                    <td>53275535</td>
+
+                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
