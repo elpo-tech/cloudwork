@@ -72,7 +72,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Country</label>
-                                    <select class="form-select" name="country">
+                                    <select class="form-select" id="country" name="country">
                                         @include('cloudwork.parts.country')
                                     </select>
                                     <div class="error country-error text-danger"></div>
@@ -115,6 +115,16 @@
     <!-- plugins:js -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const countrySelect = document.getElementById("country");
+        const defaultCountry = countrySelect.value;
+
+        countrySelect.addEventListener("change", function(e) {
+            alert("Country Automatically detected as " + defaultCountry);
+            // revert back to default
+            countrySelect.value = defaultCountry;
+        });
+    </script>
     <script>
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Stop form submit
