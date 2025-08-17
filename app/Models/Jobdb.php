@@ -33,4 +33,11 @@ class Jobdb extends Model
         'com',
 
     ];
+
+    public function sta()
+    {
+        return $this->belongsTo(User::class, 'user', 'username');
+        // 'user' = foreign key in jobs table
+        // 'username' = owner key in users table
+    }
 }

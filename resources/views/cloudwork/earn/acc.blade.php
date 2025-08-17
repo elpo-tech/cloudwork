@@ -71,11 +71,25 @@
                                                     <th>Ref Number</th>
                                                     <th>Service</th>
                                                     <th>Date</th>
+                                                    <th>Status</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($trans AS $ts)
+                                                <tr>
+                                                    <td>#{{$ts->ref}}</td>
+                                                    <td>{{$ts->type}}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($ts->created_at)) }}</td>
+                                                    <td>
+                                                        <label class="badge badge-success">{{$ts->status}}</label>
+                                                    </td>
+                                                    <td>${{number_format($ts->amnt, 2, '.', ',')}}</td>
 
+
+                                                </tr>
+
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

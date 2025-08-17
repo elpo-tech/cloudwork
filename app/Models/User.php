@@ -37,6 +37,21 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    public function jobs()
+    {
+        return $this->hasMany(Jobdb::class, 'user', 'username');
+        // 'user'   = foreign key in jobs table
+        // 'username' = local key in users table
+    }
+
+    public function earn()
+    {
+        return $this->hasOne(Accdb::class, 'uid', 'id');
+        // Earn.uid → foreign key
+        // User.id  → local key
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

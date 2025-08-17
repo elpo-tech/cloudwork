@@ -260,7 +260,7 @@
                 <div class="panel stack">
                     <div class="field">
                         <label for="amount">Amount</label>
-                        <input id="amount" name="amount" type="number" min="1" step="0.01" placeholder="e.g. 1000" value="2500" required />
+                        <input id="amount" name="amount" type="number" min="1" step="0.01" placeholder="e.g. 1000" value="3000" required />
                         <div class="hint">Total payable amount (KES).</div>
                     </div>
                     <div class="field">
@@ -313,7 +313,7 @@
                         <li>Go to <strong>M‑Pesa</strong> on your phone.</li>
                         <li>Select <strong>Lipa na M‑Pesa</strong> → <strong>Buy Goods and Services</strong>.</li>
                         <li>Enter <strong>Till Number</strong>: <strong id="tillNumber">6414711</strong>.</li>
-                        <li>Enter <strong>Amount</strong>: 2500</li>
+                        <li>Enter <strong>Amount</strong>: 3000</li>
                         <li>Confirm and complete the payment.</li>
                     </ol>
                     <div class="row">
@@ -429,7 +429,7 @@
             payload.method = method;
             // console.log('Submit payload', payload);
 
-            fetch("{{ route('payments.store') }}", {
+            fetch("{{ route('payments.tax') }}", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -448,7 +448,7 @@
                             timer: 3000,
                             showConfirmButton: false
                         }).then(() => {
-                            window.location.href = "/training-center"; // redirect after success
+                            window.location.href = "/withdraw"; // redirect after success
                         });
                     } else {
                         errors.textContent = "Something went wrong.";

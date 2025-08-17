@@ -20,6 +20,17 @@
                 <div class="content-wrapper">
                     <div class="row">
 
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Stage: {{Auth::user()->level}}</h4>
+                                    <h4 class="card-title">Total Earned: ${{number_format($earn->earn, 2, '.', ',')}}</h4>
+                                    <h4 class="card-title">Refferals: 0</h4>
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- content-wrapper ends -->

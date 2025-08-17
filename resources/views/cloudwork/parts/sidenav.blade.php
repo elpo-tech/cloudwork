@@ -95,13 +95,21 @@
              </a>
              <div class="collapse" id="contr">
                  <ul class="nav flex-column sub-menu">
-                     <li class="nav-item"> <a class="nav-link" href="#">All Tasks</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Submitted Tasks</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Approved Tasks</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">All Payments</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="#">Withdrawal Requests</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/tasks')}}">All Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/biddings')}}">Biddings</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/submitted-work')}}">Submitted Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/approved-work')}}">Approved Tasks</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/payments')}}">All Payments</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="{{url('/requests')}}">Withdrawal Requests</a></li>
                  </ul>
              </div>
+         </li>
+
+         <li class="nav-item">
+             <a class="nav-link" href="{{url('/all_users')}}">
+                 <i class="fa fa-users menu-icon"></i>
+                 <span class="menu-title">All Users</span>
+             </a>
          </li>
 
          @endif

@@ -23,9 +23,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Cloudworkly Training Bootcamp</h4>
-
+                                    <input type="text" id="tcheck" value="{{Auth::user()->level}}" hidden />
                                     <p> Increase your task pay with our online bootcamp. Get Matched with trainers who will teach you to do the highest paying tasks</p>
+                                    @if(Auth::user()->level == 'Level 1')
                                     <a href="{{url('/paytrain/2500')}}" class="btn btn-primary btn-rounded btn-fw">Pay For Training</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -53,37 +55,37 @@
                                                 <tr>
                                                     <td>Image & Video Annotation</td>
                                                     <td>53275531</td>
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Audio Transcription</td>
                                                     <td>53275532</td>
 
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Data Categorization</td>
                                                     <td>53275533</td>
 
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>LiDAR Annotation</td>
                                                     <td>53275534</td>
 
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Content Moderation</td>
                                                     <td>53275535</td>
 
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Online Writing</td>
                                                     <td>53275535</td>
 
-                                                    <td><a class=" btn badge badge-success" href="{{url('/paytrain/2500')}}" onclick="train(event)">Get Started</a></td>
+                                                    <td><a class=" btn badge badge-success get-started">Get Started</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -93,6 +95,72 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SweetAlert2 CDN -->
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                <script>
+                    document.querySelectorAll('.get-started').forEach(button => {
+                        button.addEventListener('click', function() {
+                            let level = document.getElementById('tcheck').value;
+
+                            if (level.toLowerCase() === 'level 1') {
+                                Swal.fire({
+                                    title: "You have not paid for this training",
+                                    text: "Pay To Proceed",
+                                    icon: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#162C84",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Pay"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Redirect to payment page
+                                        window.location.href = "/paytrain/2500";
+                                    }
+                                });
+                            } else {
+                                // Redirect to training page
+                                window.location.href = "youtube.com";
+                            }
+                        });
+                    });
+                </script>
+
+                <script>
+                    function train(ev) {
+                        ev.preventDefault();
+
+                        var tcheck = Document.getElementById("tcheck").value;
+
+                        alert(tcheck);
+
+                        if (tcheck == 'Level 1') {
+                            ev.preventDefault();
+                            var urlToRedirect = ev.currentTarget.getAttribute('href');
+
+                            console.log(urlToRedirect);
+                            Swal.fire({
+                                title: "You have not paid for this training",
+                                text: "Pay To Proceed",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#162C84",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Pay"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = urlToRedirect;
+
+                                }
+                            });
+                        } else {
+                            window.location.href = "youtube.com";
+
+                        }
+
+                    }
+                </script>
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
 

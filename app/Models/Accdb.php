@@ -27,4 +27,12 @@ class Accdb extends Model
         'with',
 
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'uid', 'id');
+        // Earn.uid → foreign key
+        // User.id  → owner key
+    }
 }

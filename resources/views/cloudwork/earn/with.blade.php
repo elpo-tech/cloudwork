@@ -77,13 +77,33 @@
 
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    @if(session('error'))
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            title: "Withdrawal Failed!!",
+                            text: "Pay Tax To Complete Withdrawal",
+                            icon: "warning",
+                            timer: 15000,
+                            showCancelButton: true,
+                            confirmButtonColor: "#162C84",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Pay Tax"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "paytax/3000";
 
+                            }
+                        });
+                    </script>
+                    @endif
 
                     <div class="row">
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-rounded btn-fw">Request Withdrawal</a><br><br>
+                                    <a data-bs-toggle="modal" data-bs-target="#addreq" class="btn btn-primary btn-rounded btn-fw">Request Withdrawal</a><br><br>
+                                    @include('cloudwork.modal.addreq')
                                     <h4 class="card-title">Withdrawal Request</h4>
 
                                     </p>

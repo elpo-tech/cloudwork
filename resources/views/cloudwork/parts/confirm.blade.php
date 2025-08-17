@@ -1,39 +1,17 @@
 <script>
-  function train(ev) {
+  function confirmationtask(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "You have not paid for this training",
-      text: "Pay To Proceed",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#162C84",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Pay"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = urlToRedirect;
-
-      }
-    });
-  }
-
-
-  function confirmationdman(ev) {
-    ev.preventDefault();
-    var urlToRedirect = ev.currentTarget.getAttribute('href');
-
-    console.log(urlToRedirect);
-    Swal.fire({
-      title: "Are you Sure You Want To Delete User Account?",
+      title: "Are you Sure You Want To Delete Tasks?",
       text: "You won't be able to Undo the change",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#162C84",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete User Account!"
+      confirmButtonText: "Yes, delete Task!"
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = urlToRedirect;
@@ -44,19 +22,19 @@
 
 
 
-  function confirmationdcu(ev) {
+  function confirmationbid(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "Are you Sure You Want To Delete Customer?",
+      title: "Are you Sure You Want To Bid For This Task?",
       text: "You won't be able to redo this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#162C84",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes Place Bid!"
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = urlToRedirect;
@@ -65,40 +43,40 @@
     });
   }
 
-  function confirmationdsup(ev) {
+  function confirmationdo(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "Are you Sure You Want To Delete Supplier?",
+      title: "Are you Sure You Want To Upload Task?",
       text: "You won't be able to redo this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#162C84",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, Upload!"
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = urlToRedirect;
+        document.getElementById('registrati').submit();
 
       }
     });
   }
 
-  function confirmationduni(ev) {
+  function confirmationacc(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "Do You Want To Delete Unit?",
+      title: "Do You Want To Accept Task?",
       text: "You won't be able to redo this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#162C84",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes Delete!"
+      confirmButtonText: "Yes Aceept!"
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = urlToRedirect;
@@ -107,19 +85,19 @@
     });
   }
 
-  function confirmationdisco(ev) {
+  function confirmationrej(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "Are you Sure You Want To Delete Discount Rate?",
+      title: "Are you Sure You Want To Reject?",
       text: "You won't be able to redo this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#162C84",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes"
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = urlToRedirect;
@@ -130,13 +108,13 @@
 
 
 
-  function confirmationtax(ev) {
+  function confirmationdel(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href');
 
     console.log(urlToRedirect);
     Swal.fire({
-      title: "Do You Want To Delete Tax Rate?",
+      title: "Do You Want To Delete User Account?",
       text: "You won't be able to redo this!",
       icon: "warning",
       showCancelButton: true,

@@ -22,8 +22,11 @@
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
+
+                                    <h3 class="text-danger">Check your Email for Instructions on Pending Tasks</h3>
+
                                     <h4 class="card-title">List Of Tasks In Progress</h4>
-                                    <h5>0 Tasks</h5> <br><br>
+                                    <h5>{{$task->count()}} Tasks</h5> <br><br>
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table" id="example1">
@@ -37,7 +40,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($task AS $ts)
+                                                <tr>
+                                                    <td>#{{$ts->code}}</td>
+                                                    <td>{{$ts->title}}</td>
+                                                    <td>
+                                                        <label class="{{ $ts->status == 'Pending' ? 'badge badge-danger' : 'badge badge-success' }}">{{$ts->status}}</label>
+                                                    </td>
+                                                    <td>${{number_format($ts->pay, 2, '.', ',')}}</td>
 
+                                                    <td>
+                                                        @if($ts->status == 'Pending')
+                                                        <label class="badge badge-warning">Check your Email for Approval</label>
+                                                        @else
+                                                        <a class="btn btn-success btn-rounded btn-fw" href="{{url('/do_task/'.$ts->id)}}">
+                                                            <i class="fa fa-file-text"></i> Complete Order
+                                                        </a>
+                                                        @endif
+
+                                                        <a class="btn btn-danger btn-sm" href="{{url('delete_order/'.$ts->id)}}" onclick="confirmationtask(event)">
+                                                            <i class="ti ti-trash"></i> Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

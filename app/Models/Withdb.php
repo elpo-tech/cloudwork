@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transdb extends Model
+class Withdb extends Model
 {
     use HasFactory;
 
-    public $table = 'transdbs';
+    public $table = 'withdbs';
 
     /**
      * The attributes that are mass assignable.

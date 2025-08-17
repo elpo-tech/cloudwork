@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Available Task | Cloud Workly </title>
+    <title>All Tasks | Cloud Workly </title>
     <!-- plugins:css -->
     @include('cloudwork.parts.head')
     <div class="container-scroller">
@@ -22,8 +22,11 @@
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
+                                    <a data-bs-toggle="modal" data-bs-target="#addtask" class="btn btn-primary btn-rounded btn-fw">Add Tasks</a><br><br>
+                                    @include('cloudwork.modal.addtask')
                                     <h4 class="card-title">List Of Available Task For you</h4>
 
+                                    </p>
                                     <div class="table-responsive">
                                         <table class="table" id="example1">
                                             <thead>
@@ -31,6 +34,8 @@
                                                     <th>Order Code</th>
                                                     <th>Order Name</th>
                                                     <th>Amount</th>
+                                                    <th>Duration</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -40,21 +45,29 @@
                                                     <td>#{{$ts->code}}</td>
                                                     <td>{{$ts->title}}</td>
                                                     <td>${{number_format($ts->pay, 2, '.', ',')}}</td>
-
-
+                                                    <td>{{$ts->dead}} Minutes</td>
                                                     <td>
-
-                                                        <a class="btn btn-success btn-rounded btn-fw" href="{{url('/view_task/'.$ts->id)}}">
-                                                            <i class="fa fa-file-text"></i> View Order
+                                                        <div class="form-check form-check-success">
+                                                            <label class="form-check-label">
+                                                                @if($ts->status == '1')
+                                                                <input type="checkbox" class="form-check-input" checked> Active
+                                                                @else
+                                                                <input type="checkbox" class="form-check-input"> Inactive
+                                                                @endif
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edittask{{$ts->id}}">
+                                                            <i class="ti ti-pencil-alt"></i> Edit
                                                         </a>
-
-                                                        <a class="btn btn-success btn-rounded btn-fw" href="{{url('take_task/'.$ts->id)}}" onclick="confirmationbid(event)">
-                                                            <i class="fa fa-file-text"></i> Bid Order
+                                                        <a class="btn btn-danger btn-sm" href="{{url('delete_task/'.$ts->id)}}" onclick="confirmationtask(event)">
+                                                            <i class="ti ti-trash"></i> Delete
                                                         </a>
 
                                                     </td>
                                                 </tr>
-
+                                                @include('cloudwork.modal.edittask')
                                                 @endforeach
                                             </tbody>
                                         </table>

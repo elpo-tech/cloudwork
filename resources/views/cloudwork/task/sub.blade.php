@@ -23,7 +23,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">List Of Submitted Tasks</h4>
-                                    <h5>0 Tasks</h5> <br><br>
+                                    <h5>{{$task->count()}} Tasks</h5> <br><br>
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table" id="example1">
@@ -33,11 +33,23 @@
                                                     <th>Order Name</th>
                                                     <th>Status</th>
                                                     <th>Payment</th>
-                                                    <th>Action</th>
+                                                    <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($task AS $ts)
+                                                <tr>
+                                                    <td>#{{$ts->code}}</td>
+                                                    <td>{{$ts->title}}</td>
+                                                    <td>
+                                                        <label class="{{ $ts->status == 'Pending' ? 'badge badge-danger' : 'badge badge-success' }}">{{$ts->status}}</label>
+                                                    </td>
+                                                    <td>${{number_format($ts->pay, 2, '.', ',')}}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($ts->updated_at)) }}</td>
 
+                                                </tr>
+
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

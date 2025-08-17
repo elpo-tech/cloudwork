@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Rejected Task | Cloud Workly </title>
+    <title>Approved Tasks | Cloud Workly </title>
     <!-- plugins:css -->
     @include('cloudwork.parts.head')
     <div class="container-scroller">
@@ -22,7 +22,7 @@
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">List Of Rejected Tasks</h4>
+                                    <h4 class="card-title">List Of Approved Tasks</h4>
                                     <h5>{{$task->count()}} Tasks</h5> <br><br>
                                     </p>
                                     <div class="table-responsive">
@@ -31,6 +31,7 @@
                                                 <tr>
                                                     <th>Order Code</th>
                                                     <th>Order Name</th>
+                                                    <th>User</th>
                                                     <th>Status</th>
                                                     <th>Payment</th>
                                                     <th>Date</th>
@@ -41,8 +42,9 @@
                                                 <tr>
                                                     <td>#{{$ts->code}}</td>
                                                     <td>{{$ts->title}}</td>
+                                                    <td>{{ $ts->sta ? $ts->sta->username : 'Unassigned' }}</td>
                                                     <td>
-                                                        <label class="badge badge-danger">{{$ts->status}}</label>
+                                                        <label class="badge badge-success">{{$ts->status}}</label>
                                                     </td>
                                                     <td>${{number_format($ts->pay, 2, '.', ',')}}</td>
                                                     <td>{{ date('d/m/Y', strtotime($ts->updated_at)) }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Accdb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -69,7 +70,8 @@ class Dash extends Controller
         if (Auth::check()) {
 
 
-            return view('cloudwork.pro');
+            $earn = Accdb::where('uid', Auth::user()->id)->first();
+            return view('cloudwork.pro', compact('earn'));
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');

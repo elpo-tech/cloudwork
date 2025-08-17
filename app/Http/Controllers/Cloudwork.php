@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accdb;
+use App\Models\Transdb;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,12 +55,72 @@ class Cloudwork extends Controller
         return view('pay');
     }
 
+    public function store(Request $request)
+    {
+
+        $amnt = $request->amount / 129.50;
+
+        $payment = Transdb::create([
+            'status'   => "Paid In",
+            'type'   => "Training Fee",
+            'user'   => Auth::user()->username,
+            'uid'   => Auth::user()->id,
+            'amnt'   => $amnt,
+            'email'    => $request->email,
+            'phone' => $request->mpesaPhone,
+            'ref'  => $request->mpesaCode,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Payment saved successfully',
+            'data'    => $payment
+        ]);
+    }
+
+
+    public function tax(Request $request)
+    {
+
+        $amnt = $request->amount / 129.50;
+
+        $payment = Transdb::create([
+            'status'   => "Paid In",
+            'type'   => "Tax Fee",
+            'user'   => Auth::user()->username,
+            'uid'   => Auth::user()->id,
+            'amnt'   => $amnt,
+            'email'    => $request->email,
+            'phone' => $request->mpesaPhone,
+            'ref'  => $request->mpesaCode,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Payment saved successfully',
+            'data'    => $payment
+        ]);
+    }
+
 
     public function patrain($id)
     {
+        if (Auth::check()) {
+            return view('pay2');
+        }
 
-        return view('pay2');
+        return back()->with('error', 'Access Denied!! Session Expired');
     }
+
+    public function patax($id)
+    {
+        if (Auth::check()) {
+            return view('patax');
+        }
+
+        return back()->with('error', 'Access Denied!! Session Expired');
+    }
+
 
     public function checkUserData(Request $request)
     {
