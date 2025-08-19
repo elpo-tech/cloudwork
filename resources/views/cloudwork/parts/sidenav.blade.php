@@ -69,18 +69,12 @@
          </li>
 
          <li class="nav-item">
-             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                 <i class="menu-icon fa fa-question-circle"></i>
+             <a class="nav-link" href="{{url('/ticket')}}">
+                 <i class="fa fa-question-circle menu-icon"></i>
                  <span class="menu-title">Help & Support</span>
-                 <i class="menu-arrow"></i>
              </a>
-             <div class="collapse" id="charts">
-                 <ul class="nav flex-column sub-menu">
-                     <li class="nav-item"> <a class="nav-link" href="#">FAQs</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="{{url('/ticket')}}">Submit a Ticket</a></li>
-                 </ul>
-             </div>
          </li>
+
 
          @if(Auth::user()->type == "Admin")
          <br>

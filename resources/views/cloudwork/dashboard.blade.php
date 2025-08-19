@@ -57,18 +57,18 @@
                                                     </div>
                                                     <div>
                                                         <p class="statistics-title">Total Earned</p>
-                                                        <h3 class="rate-percentage">$0.00</h3>
-                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
+                                                        <h3 class="rate-percentage">${{number_format($earn->earn, 2, '.', ',')}}</h3>
+                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>${{number_format($earn->earn, 2, '.', ',')}}</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Available For Withdrawal</p>
-                                                        <h3 class="rate-percentage">$0.00</h3>
-                                                        <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
+                                                        <h3 class="rate-percentage">${{number_format($earn->bal, 2, '.', ',')}}</h3>
+                                                        <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>${{number_format($earn->bal, 2, '.', ',')}}</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Total Withdrawn</p>
-                                                        <h3 class="rate-percentage">$0.00</h3>
-                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>$0.00</span></p>
+                                                        <h3 class="rate-percentage">${{number_format($earn->with, 2, '.', ',')}}</h3>
+                                                        <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>${{number_format($earn->with, 2, '.', ',')}}</span></p>
                                                     </div>
                                                     <div class="d-none d-md-block">
                                                         <p class="statistics-title">Avg. Time on Site</p>

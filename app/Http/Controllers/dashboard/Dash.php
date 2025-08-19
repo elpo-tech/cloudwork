@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Accdb;
+use App\Models\Transdb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +18,10 @@ class Dash extends Controller
 
         if (Auth::check()) {
 
+            $earn = Accdb::where('uid', Auth::User()->id)->first();
+            $trans = Transdb::where('uid', Auth::User()->id)->get();
 
-            return view('cloudwork.dashboard');
+            return view('cloudwork.dashboard', compact('earn', 'trans'));
         }
 
         return back()->with('error', 'Entry Denied, Log in Again!');
