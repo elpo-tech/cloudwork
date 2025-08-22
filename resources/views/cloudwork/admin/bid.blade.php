@@ -29,6 +29,7 @@
                                         <table class="table" id="example1">
                                             <thead>
                                                 <tr>
+                                                    <th>Date</th>
                                                     <th>User Name</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
@@ -41,6 +42,7 @@
                                             <tbody>
                                                 @foreach($task AS $ts)
                                                 <tr>
+                                                    <td>{{ date('d/m/Y h:i A', strtotime($ts->created_at)) }}</td>
                                                     <td>{{ $ts->sta ? $ts->sta->username : 'Unassigned' }}</td>
                                                     <td>{{ $ts->sta ? $ts->sta->email : 'Unassigned' }}</td>
                                                     <td>{{ $ts->sta ? $ts->sta->phone : 'Unassigned' }}</td>
