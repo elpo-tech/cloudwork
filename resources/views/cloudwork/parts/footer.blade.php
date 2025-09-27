@@ -56,6 +56,7 @@
 
     window.onload = updateGreeting;
 </script>
+
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="/assets/js/file-upload.js"></script>
